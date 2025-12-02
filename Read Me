@@ -1,0 +1,58 @@
+Capstone Code ACL Injury Impact Script 
+Overview
+This project analyzes the impact of ACL injuries on NBA player performance using historical game logs and injury data. It builds predictive models to estimate post-injury performance changes and provides insights through visualizations and feature importance analysis.
+________________________________________
+Features
+•	Data Processing: 
+o	Cleans and standardizes NBA game logs.
+o	Matches ACL injury records to player IDs(name) using fuzzy matching.
+•	Feature Engineering: 
+o	Computes pre- and post-injury averages for key stats (PTS, AST, REB, FG%, etc.).
+o	Calculates deltas and efficiency metrics.
+o	Performs PCA for dimensionality reduction.
+•	Modeling: 
+o	Baseline: KNN Multi-Output Regression.
+o	Advanced: Random Forest Multi-Output Regression with hyperparameter tuning.
+•	Evaluation: 
+o	Metrics: MSE, R^2, Cross-Validation scores.
+o	Visualizations: Actual vs Predicted plots, residual analysis, clustering, correlation heatmap.
+•	Interpretability: 
+o	Feature importance and permutation importance for Random Forest.
+________________________________________
+Requirements
+•	Python 3.8+
+•	Libraries: 
+Shell
+pip install pandas numpy matplotlib seaborn scikit-learn tqdm rapidfuzz nba_api
+
+________________________________________
+How to Run
+Security Note!!!
+This code disables SSL certificate verification when fetching data from NBA_api. 
+It was done to get around certificate issues I was experiencing and you may want to comment out: 
+resp = requests.get(url, verify=False, headers=headers, timeout=10) if you are running the code.
+Or to make it easier and prevent breakage change “verify=False” to “verify=True”.
+Run
+1.	Place the injury dataset (NBA Player Injury Stats(1951 - 2023).csv) in the project directory.
+2.	Run the script: 
+Shell
+python modeling_pipeline_updated.py
+Show more lines
+3.	Outputs will be saved in: 
+4.	model_outputs/
+________________________________________
+ Outputs
+•	Metrics: 
+o	model_comparison.csv – KNN vs Random Forest performance.
+•	Visualizations: 
+o	knn_actual_vs_pred_png – KNN prediction scatter plots.
+o	rf_residuals_boxplot.png – Random Forest residuals boxplot.
+o	residual_hist_png – Residual histograms.
+o	rf_top15_features.png – Feature importance chart.
+o	feature_correlation_heatmap.png – Correlation matrix.
+o	knn_cluster_visualization.png – Player clustering visualization.
+•	Feature Importance: 
+o	rf_feature_importance.csv
+o	rf_permutation_importance.csv
+________________________________________
+
